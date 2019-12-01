@@ -661,7 +661,12 @@ def evaluatePolicy(bob):
     #     with open("Traces/46/optimalTracesOnlyCurrent.txt ", "a+") as f:
     #     	f.write(stateString)
     # while bob is not in a state where he will die
+    count = 0
     while bob.myGrid.data[bob.state[0]][bob.state[1]] != 'd' and bob.myGrid.data[bob.state[0]][bob.state[1]] != 'r':
+        if count >= 500:
+            print("I'm stuck. I give up!")
+            break
+        count += 1
         # stateString = ""
         # previousState = bob.state[:]
         # print(bob.state)
@@ -671,6 +676,7 @@ def evaluatePolicy(bob):
         totalReward = totalReward + bob.reward
         # with open("Traces/00/optimalPolicyActions.txt", "a") as f:
         #     f.write(str(lastAction))
+        
         if bob.myGrid.data[bob.state[0]][bob.state[1]] == 't' and bob.state[2] == 1 and bob.state[7] == 1:
             print("SAFE")
             break
